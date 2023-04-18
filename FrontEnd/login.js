@@ -1,6 +1,6 @@
 const loginButton = document.querySelector(".login-button")
 
-loginButton.addEventListener("click", async function (e) {
+loginButton.addEventListener("click", async function connect(e) {
     e.preventDefault();
 
     const emailAddress = document.getElementById("Email").value;
@@ -12,7 +12,6 @@ loginButton.addEventListener("click", async function (e) {
             headers: {
                 'accept': 'application/json',
                 'Content-Type': 'application/json',
-                // 'Authorization': 'Bearer token',
             },
             body: JSON.stringify({
                 'email': emailAddress,
@@ -20,34 +19,10 @@ loginButton.addEventListener("click", async function (e) {
             })
         });
 
-        /* const token = await response.token;
-        localStorage.getItem('token');
-        localStorage.setItem('token'); */
-
-        /* let tokens = localStorage.getItem('token');
-        tokens = await response.json();
-        const valeurToken = JSON.stringify(tokens);
-        localStorage.setItem('token', valeurToken); 
-        console.log(tokens) */ 
-
-        /* const token = await response.text();
-        console.log(token); */
-
         if (!response.ok) {
             throw Error("oooopsi");
         }; 
 
-        /* const token = await response.text();
-        console.log(token); */
-
-        /* const token = document.createElement("div");
-        token.innerText = div.token */
-        
-        /* const token = response.text();
-        this.token = token;
-        if(token){
-            
-        }; */
         // l'administrateur peut avoir un compte admin et un utilisateur avec la même adresse. Dans ce cas, comment faire pour redirigier vers la bonne version du site ? Ci-dessous, redirection vers la page adaptée seulement si l'admin n'a pas de compte utilisateur 
 
         if(emailAddress === "sophie.bluel@test.tld"){
@@ -55,20 +30,24 @@ loginButton.addEventListener("click", async function (e) {
         }else{
             location.href = "index.html";
         };
+
+        const token = await connect('token');
+        
+        localStorage.setItem('token', JSON.stringify(token));  // sessionStorage? 
     }
 
     catch (Error) {
         document.getElementById("erreeur").style.display = "block";
-       // alert("ERREUR"); autre possibibilité 
-    }
-})
+    };
+});
 
-// stocké le token pour rester connecté, OK?
-// pouvoir être connecté en tant qu'administrateur, OK?
-// renvoyé l'administrrateur vers la page d'accueil d'administrateur (3ème partie de la maquette Figma) OK?
 
-const logoutButton = document.querySelector("login-option-nav")
+// INSERT LOGOUT FUNCTION IN SECTION BELOW 
 
-/*
-INSÉRER ICI UNE FONCTION QUI DECONNCETE UTILISATEUR/ADMIN
-*/
+
+const logoutButton = document.querySelector("login-option-nav-2");
+
+logoutButton.addEventListener('click', () => {
+    localStorage.removeItem('token');
+});
+

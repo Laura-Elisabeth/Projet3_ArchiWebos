@@ -26,10 +26,19 @@ window.addEventListener("click", function(e) {
     };
 }); 
 
-const response = await fetch('http://localhost:5678/api/works/');
+const response = await fetch('http://localhost:5678/api/works/', {
+    method: 'GET',
+    headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer' + localStorage.getItem('token')
+    },
+});
+
 const works = await response.json(); 
 
 function genererWorks(works){
+
 	for (let i = 0; i < works.length; i++) {
 
 		const figure = works[i];
@@ -38,21 +47,32 @@ function genererWorks(works){
 
 		const workElement = document.createElement("figure");
 
+        const divElement = document.createElement('div');
+        divElement.style.position = "relative";
+
 		const imageElement = document.createElement("img");
+        imageElement.style.display = 'block';
 		imageElement.src = figure.imageUrl;   
 
         document.getElementById("editfig").style.display = "block";
-        
         const editFig = document.getElementById("editfig");
 
+        // meant to display trash can icon on the photo but somethin's missing //
+        document.getElementById('trash-can').style.display = 'block';
+        const trashCan = document.getElementById('trash-can');
+        trashCan.style.position = 'absolute';
+    
         modalBody.appendChild(workElement);
 
-		workElement.appendChild(imageElement);
+		workElement.appendChild(divElement);
+
+        divElement.appendChild(imageElement);
 
         workElement.appendChild(editFig);
+
+        divElement.appendChild(trashCan);
     };
 };
-
 genererWorks(works);
 
 /* to do : 1. Modification buttons displayed on the pictures.
@@ -71,12 +91,20 @@ const modal2 = document.querySelector(".the-modal-2");
 
 const addButton = document.querySelector(".add-button");
 
-addButton.addEventListener("click", function () {
-    modal2.style.display = "block";
+const cross2 = document.querySelector('.close-2');
+
+const back = document.querySelector('.back');
+
+addButton.addEventListener('click', function () {
+    modal2.style.display = 'block';
 });
 
-// not working
-cross.addEventListener("click", function () {
+back.addEventListener('click', function () {
+    modal2.style.display = 'none'
+    modal.style.display = 'block';
+});
+
+cross2.addEventListener("click", function () {
     modal2.style.display = "none";
     modal.style.display = "none";
 });
@@ -96,7 +124,7 @@ const validateButton = document.querySelector(".validate-button");
 validateButton.addEventListener("click", async function(e) {
     e.preventDefault();
 
-    const addedPhoto = document.getElementById("added-photo").value;
+    const addedPhoto = document.getElementById("imageInput").value;
     const addedTitle = document.getElementById("added-title").value;
     const addedCategory = document.getElementById("added-category").value;
 
@@ -104,15 +132,15 @@ validateButton.addEventListener("click", async function(e) {
         method: 'POST',
         headers: {
             'accept': 'application/json',
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4',
-            'Content-Type' : 'multipart/form-data'
+            'Content-Type' : 'multipart/form-data',
+            Authorization: 'Bearer' + localStorage.getItem('token')
         },
         body: JSON.stringify({
-            'image' : 'addedPhoto',
-            'title' : 'addedTitle',
-            'category' : 'addedCategory', 
+            'image' : addedPhoto,
+            'title' : addedTitle,
+            'category' : addedCategory, 
         })
-    });
-
+    }); 
     genererWorks(works);
-});
+}); 
+

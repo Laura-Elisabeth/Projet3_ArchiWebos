@@ -33,7 +33,7 @@
 		        <ul>
 			        <li>projets</li>
 			        <li>contact</li>
-			        <li><a href="index.html" class="login-option-nav">logout</a></li>
+			        <li><a href="index.html" class="login-option-nav-2">logout</a></li>
 			        <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		        </ul>
 	        </nav>
@@ -73,6 +73,7 @@
 						<h2>Galerie photo</h2>
 					</div>
 					<div class="modal-body">
+						<a id='trash-can'><i class="fa-solid fa-trash-can"></i></a>
 						<p id="editfig">éditer</p> 
 						<p id="editfig">éditer</p> 
 						<p id="editfig">éditer</p> 
@@ -98,27 +99,38 @@
 
 				<div class="the-modal-2">
 				<div class="modal-2">
-					<div class="modal-header">
-						<span class="close">&times;</span>
+					<div class="modal-header-2">
+						<span class="close-2">&times;</span>
+						<span class="back">&larr;</span>
 						<h2>Ajout Photo</h2>
 					</div>
-					<div class="modal-body">
-						<!-- replace by a form-->
-						<div class="photo-added">
-							<label for="psw"><b>Photo</b></label>
-		  					<input type="image" id="added-photo" name="psw" placeholder="" required>
-						</div>
+					<div class="modal-body-2">
+					<div class="modal-body-2b">	
+						 <div class='photo-added'> 
+							<i class="fa-regular fa-image"></i>
+							<label for="imageInput" class="btn-0">+ Ajouter photo</label>
+							<input id="imageInput" type="file">
+							<p>jpg, png: 4mo max</p>
+							<image id="imageOutput" alt='Image'/>
+						</div> 
 						<div class="title-added">
-							<label for="psw"><b>Title</b></label>
-							<input type="text" id="added-title" name="psw" placeholder="" required>
+							<label for='psw'><b>Title</b></label>
+							<input type='text' id='added-title' name='psw' placeholder='' required>
 						</div>
-						<div class="category-added">
-							<label for="psw"><b>Category</b></label>
-		  					<input type="text" id="added-category" name="psw" placeholder="" required>
+						<div class='category-added'>
+							<label for='psw'><b>Category</b></label>
+							<select name="category" id="added-category">
+								<option value=""></option>
+								<option value="select-object">Objet</option>
+								<option value="select-apartment">Appartement</option>
+								<option value="select-hotels-and-restaurants">Bar & restaurant</option>
+							</select>
+							
 						</div>
+					</div>	
 					</div>
 					<div class="modal-footer">
-						<div class="add-photo">
+						<div class="add-photo-2">
 							<button class="validate-button">Valider</button>
 						</div>
 					</div>
