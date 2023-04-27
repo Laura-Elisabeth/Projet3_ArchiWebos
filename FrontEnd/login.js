@@ -1,4 +1,4 @@
-const loginButton = document.querySelector(".login-button")
+const loginButton = document.querySelector('.login-button');
 
 loginButton.addEventListener("click", async function connect(e) {
     e.preventDefault();
@@ -23,6 +23,11 @@ loginButton.addEventListener("click", async function connect(e) {
             throw Error("oooopsi");
         }; 
 
+        const responseBody = await response.json();
+        const token = responseBody.token;
+        
+        localStorage.setItem('token', token); 
+
         // l'administrateur peut avoir un compte admin et un utilisateur avec la même adresse. Dans ce cas, comment faire pour redirigier vers la bonne version du site ? Ci-dessous, redirection vers la page adaptée seulement si l'admin n'a pas de compte utilisateur 
 
         if(emailAddress === "sophie.bluel@test.tld"){
@@ -30,24 +35,11 @@ loginButton.addEventListener("click", async function connect(e) {
         }else{
             location.href = "index.html";
         };
-
-        const token = await connect('token');
-        
-        localStorage.setItem('token', JSON.stringify(token));  // sessionStorage? 
+ 
     }
 
     catch (Error) {
-        document.getElementById("erreeur").style.display = "block";
+        document.getElementById('erreeur').style.display = "block";
     };
-});
-
-
-// INSERT LOGOUT FUNCTION IN SECTION BELOW 
-
-
-const logoutButton = document.querySelector("login-option-nav-2");
-
-logoutButton.addEventListener('click', () => {
-    localStorage.removeItem('token');
 });
 

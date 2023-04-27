@@ -350,3 +350,7 @@ footer nav ul {
 	display: none;
 	color: red;
 }
+
+.login-button button{
+	cursor: pointer;
+}

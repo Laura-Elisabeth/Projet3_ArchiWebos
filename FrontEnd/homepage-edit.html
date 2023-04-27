@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./assets/style-edit.css">
 	<script type="module" src="works.js"></script>
 	<script type="module" src="login.js"></script>
+	<script type="module" src="logout.js"></script>
 	<script type="module" src="modale.js"></script>
     <script src="https://kit.fontawesome.com/f34f3a2218.js" crossorigin="anonymous"></script>
 </head>
@@ -33,7 +34,7 @@
 		        <ul>
 			        <li>projets</li>
 			        <li>contact</li>
-			        <li><a href="index.html" class="login-option-nav-2">logout</a></li>
+			        <li><button class='logout-button' type='submit'>logout</button></li>
 			        <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		        </ul>
 	        </nav>
@@ -73,18 +74,6 @@
 						<h2>Galerie photo</h2>
 					</div>
 					<div class="modal-body">
-						<a id='trash-can'><i class="fa-solid fa-trash-can"></i></a>
-						<p id="editfig">éditer</p> 
-						<p id="editfig">éditer</p> 
-						<p id="editfig">éditer</p> 
-						<p id="editfig">éditer</p> 
-						<p id="editfig">éditer</p> 
-						<p id="editfig">éditer</p> 
-						<p id="editfig">éditer</p> 
-						<p id="editfig">éditer</p> 
-						<p id="editfig">éditer</p> 
-						<p id="editfig">éditer</p> 
-						<p id="editfig">éditer</p> 
 					</div>
 					<div class="modal-footer">
 						<div class="add-photo">
@@ -104,41 +93,42 @@
 						<span class="back">&larr;</span>
 						<h2>Ajout Photo</h2>
 					</div>
-					<div class="modal-body-2">
+					<form class="modal-body-2">
 					<div class="modal-body-2b">	
-						 <div class='photo-added'> 
+						<div class="photo-added">
 							<i class="fa-regular fa-image"></i>
 							<label for="imageInput" class="btn-0">+ Ajouter photo</label>
-							<input id="imageInput" type="file">
-							<p>jpg, png: 4mo max</p>
-							<image id="imageOutput" alt='Image'/>
-						</div> 
+							<input id="imageInput" type="file" name='file' required>
+							<p class="formatImg">jpg, png: 4mo max</p>
+							<img id="imageOutput" alt='Image'/>
+						</div>
 						<div class="title-added">
 							<label for='psw'><b>Title</b></label>
 							<input type='text' id='added-title' name='psw' placeholder='' required>
 						</div>
 						<div class='category-added'>
 							<label for='psw'><b>Category</b></label>
-							<select name="category" id="added-category">
+							<input type="text" name="category" list="added-category">
+							<select name="category" id="added-category" required>
 								<option value=""></option>
-								<option value="select-object">Objet</option>
-								<option value="select-apartment">Appartement</option>
-								<option value="select-hotels-and-restaurants">Bar & restaurant</option>
+								<option value="1">Objet</option>
+								<option value="2">Appartement</option>
+								<option value="3">Bar & restaurant</option>
 							</select>
-							
 						</div>
-					</div>	
-					</div>
-					<div class="modal-footer">
 						<div class="add-photo-2">
-							<button class="validate-button">Valider</button>
+							<div class="erreeeuuur">Faiiiiled to load</div>
+							</br>
+							<input type="submit" name="validate" list="validate-button">
+							<button id="validate-button">Valider</button> 
 						</div>
 					</div>
+					</form> 
+				</div>	
 				</div>
-				</div>
-				
-            </div>
-        </div>
+
+			</div>
+		</div>
 
 		<div class="gallery">
 		</div>

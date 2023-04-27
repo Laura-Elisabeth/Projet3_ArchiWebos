@@ -27,63 +27,58 @@ window.addEventListener("click", function(e) {
 }); 
 
 const response = await fetch('http://localhost:5678/api/works/', {
-    method: 'GET',
-    headers: {
-        'accept': 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer' + localStorage.getItem('token')
-    },
-});
+                    method: 'GET',
+                    headers: {
+                        'accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                    },
+                });  
 
 const works = await response.json(); 
 
-function genererWorks(works){
+const genererWorks = (works) => {
 
-	for (let i = 0; i < works.length; i++) {
+    for (let i = 0; i < works.length; i++) { 
 
 		const figure = works[i];
 
 		const modalBody = document.querySelector(".modal-body");
+        modalBody.style.gap = '1.5rem';
 
 		const workElement = document.createElement("figure");
 
         const divElement = document.createElement('div');
         divElement.style.position = "relative";
-
+        divElement.style.height = '9rem';
+        divElement.style.gap = '1.5rem';
+        
 		const imageElement = document.createElement("img");
         imageElement.style.display = 'block';
+        imageElement.style.position = 'absolute';
 		imageElement.src = figure.imageUrl;   
 
-        document.getElementById("editfig").style.display = "block";
-        const editFig = document.getElementById("editfig");
+        const deleteWork = document.createElement('div');
+        deleteWork.classList.add('delete-tag');
+        deleteWork.insertAdjacentHTML("beforeend", '<i class="fa-solid fa-trash-can"></i>')
+        deleteWork.style.position = 'absolute'; 
 
-        // meant to display trash can icon on the photo but somethin's missing //
-        document.getElementById('trash-can').style.display = 'block';
-        const trashCan = document.getElementById('trash-can');
-        trashCan.style.position = 'absolute';
-    
+        const pElement = document.createElement('p');
+		const textEdit = document.createTextNode('edit');
+        pElement.style.position = 'absolute';
+        
         modalBody.appendChild(workElement);
 
 		workElement.appendChild(divElement);
+        workElement.appendChild(pElement);
 
         divElement.appendChild(imageElement);
+        divElement.appendChild(deleteWork);
 
-        workElement.appendChild(editFig);
-
-        divElement.appendChild(trashCan);
+		pElement.appendChild(textEdit);      
     };
 };
 genererWorks(works);
-
-/* to do : 1. Modification buttons displayed on the pictures.
-           2. Check if there's a possibility to display the 
-              edit p underneath the photos without displaying
-              them 11 times in the html file.
-           3. add possibility to send the form infos with button
-              (ok) AND clicking on enter button (still to do)
-*/
-
-////////////////////////////////////////////////////////////
 
 // Second page of the modal:
 
@@ -117,30 +112,106 @@ window.addEventListener("click", function(e) {
 });
 
 //////////////////////////////////////////////
+
+// deletes work 
+
+const deleteProject = document.querySelector('.delete-tag');
+console.log(deleteProject)
+let id = 0;
+console.log(id);
+for (let i = 0; i < deleteProject.length; i++) { 
+    deleteProject[i].addEventListener('click', (e) => {
+        const workId = works.map(work => work.id);
+        id = workId[i];
+        fetch('http://localhost:5678/api/works/${id}', {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: 'Bearer ' + localStorage.getItem('token')
+            },
+        })
+    });
+};
+
 // sends the data 
 
-const validateButton = document.querySelector(".validate-button");
+// displays uploaded images on the second page of the modal 
 
-validateButton.addEventListener("click", async function(e) {
+imageInput.onchange = evt => {
+    const addedPhoto = document.getElementById("imageInput").files[0];
+    const btn0 = document.querySelector('.btn-0');
+    const icon = document.querySelector('.fa-image');
+    const formatImg = document.querySelector('.formatImg');
+
+    if (addedPhoto) {
+        document.getElementById('imageOutput').src = URL.createObjectURL(addedPhoto);
+        imageOutput.style.display = 'block';
+        btn0.style.display = 'none';
+        icon.style.display = 'none';
+        formatImg.style.display = 'none';
+    };
+}
+
+/* to do: 
+         - add option to empty form when closing window or sending form infos*/ 
+
+
+// sends new work
+
+const form = document.querySelector('.modal-body-2');
+
+form.addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const addedPhoto = document.getElementById("imageInput").value;
-    const addedTitle = document.getElementById("added-title").value;
-    const addedCategory = document.getElementById("added-category").value;
+    const formData = new FormData();
 
-    const response = await fetch('http://localhost:5678/api/works', {
-        method: 'POST',
-        headers: {
-            'accept': 'application/json',
-            'Content-Type' : 'multipart/form-data',
-            Authorization: 'Bearer' + localStorage.getItem('token')
-        },
-        body: JSON.stringify({
-            'image' : addedPhoto,
-            'title' : addedTitle,
-            'category' : addedCategory, 
-        })
-    }); 
-    genererWorks(works);
+    const addedPhoto = document.getElementById('imageInput').files[0];
+    const addedTitle = document.getElementById('added-title').value;
+    const addedCategory = document.getElementById('added-category').value;
+
+    console.log(addedPhoto); 
+    console.log(addedTitle);
+    console.log(addedCategory); 
+
+    formData.append('image', addedPhoto);
+    formData.append('title', addedTitle);
+    formData.append('category', addedCategory);
+
+    console.log(formData);
+    
+
+    try {
+        const response = await fetch('http://localhost:5678/api/works', {
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token')
+            },
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw Error("oooopsi");
+        }; 
+
+        console.log(response);
+        modal2.style.display = "none";
+        modal.style.display = "none";
+        response = await fetch('http://localhost:5678/api/works/');
+        const works = await response.json();
+
+        genererWorks(works);
+    }
+
+    catch(Error) {
+        document.querySelector('.erreeeuuur').style.display = "block";
+    };
 }); 
 
+/*
+    - display new work dynamically; 
+    - add possibility to send the form infos by clicking the enter button 
+    - afterwards, create a function to delete the work (calling the API one more time);
+    - then, make sure the admin/user problem has been understood and fixed; 
+    - and finally, clean and re-read everthing. fix mistakes, make it prettier etc. 
+                                                                                            
+    */

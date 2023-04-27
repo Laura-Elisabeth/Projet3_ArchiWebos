@@ -7,23 +7,23 @@ function genererWorks(works){
 
 		const figure = works[i];
 
-		const divGallery = document.querySelector(".gallery");
+		const divGallery = document.querySelector('.gallery');
 
-		const workElement = document.createElement("figure");
+		const workElement = document.createElement('figure');
 
-		const imageElement = document.createElement("img");
+		const imageElement = document.createElement('img');
 		imageElement.src = figure.imageUrl;
 
-		const nomElement = document.createElement("figcaption");
+		const nomElement = document.createElement('figcaption');
 		nomElement.innerText = figure.title;
 
-		const categorieIDElement = document.createElement("p");
+		const categorieIDElement = document.createElement('p');
 		categorieIDElement.innerText = figure.category.id;
 
-		const categorienameElement = document.createElement("p");
+		const categorienameElement = document.createElement('p');
 		categorienameElement.innerText = figure.category.name
 
-		const userElement = document.createElement("p");
+		const userElement = document.createElement('p');
 		userElement.innerText = figure.userId;
 
 		divGallery.appendChild(workElement);
