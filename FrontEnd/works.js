@@ -35,47 +35,45 @@ function genererWorks(works){
 		workElement.appendChild(userElement);
 	};
 };
-
 genererWorks(works);
 
 // Bouton Filtre show all 
-const boutonFiltrerTous = document.querySelector(".filtre-tous"); 
+const boutonFiltrerTous = document.querySelector('.filtre-tous'); 
 
-boutonFiltrerTous.addEventListener("click", function () {
-	document.querySelector(".gallery").innerHTML = "";
+boutonFiltrerTous.addEventListener('click', function () {
+	document.querySelector('.gallery').innerHTML = '';
 	genererWorks(works);
 });
 
 // Bouton Filtre show objects only 
-const boutonFiltrerObjets = document.querySelector(".filtre-objet"); 
+const boutonFiltrerObjets = document.querySelector('.filtre-objet'); 
 
-boutonFiltrerObjets.addEventListener("click", function () {
+boutonFiltrerObjets.addEventListener('click', function () {
 	const objetsFiltres = works.filter(function (work) {
-		return work.category.name === "Objets" ;
+		return work.category.name === 'Objets' ;
 	});
-	document.querySelector(".gallery").innerHTML = "";
+	document.querySelector('.gallery').innerHTML = '';
 	genererWorks(objetsFiltres);
 });
 
 // Bouton Filtre show Apartments only 
-const boutonFiltrerApartments = document.querySelector(".filtre-appartement"); 
+const boutonFiltrerApartments = document.querySelector('.filtre-appartement'); 
 
-boutonFiltrerApartments.addEventListener("click", function () {
+boutonFiltrerApartments.addEventListener('click', function () {
 	const apartmentsFiltres = works.filter(function (work) {
-		return work.category.name === "Appartements";
+		return work.category.name === 'Appartements';
 	});
-	document.querySelector(".gallery").innerHTML = "";
+	document.querySelector('.gallery').innerHTML = '';
 	genererWorks(apartmentsFiltres);
 });
 
 // Bouton Filtre show Hôtels et Restaurants
-const boutonFiltrerHotelsAndRestaurants = document.querySelector(".filtre-hotelrestaurant"); 
+const boutonFiltrerHotelsAndRestaurants = document.querySelector('.filtre-hotelrestaurant'); 
 
-boutonFiltrerHotelsAndRestaurants.addEventListener("click", function () {
+boutonFiltrerHotelsAndRestaurants.addEventListener('click', function () {
 	const hotelAndRestaurantFiltres = works.filter(function (work) {
-		return work.category.name === "Hotels & restaurants";
+		return work.category.name === 'Hotels & restaurants';
 	});
-	document.querySelector(".gallery").innerHTML = "";
+	document.querySelector('.gallery').innerHTML = '';
 	genererWorks(hotelAndRestaurantFiltres);
 });
-

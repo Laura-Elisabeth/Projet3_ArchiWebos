@@ -1,41 +1,41 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang='fr'>
 <head>
-	<meta charset="UTF-8">
+	<meta charset='UTF-8'>
 	<title>Sophie Bluel - Architecte d'intérieur</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-	<meta name="description" content="">
-    <link rel="stylesheet" href="./assets/style-edit.css">
-	<script type="module" src="works.js"></script>
-	<script type="module" src="login.js"></script>
-	<script type="module" src="logout.js"></script>
-	<script type="module" src="modale.js"></script>
-    <script src="https://kit.fontawesome.com/f34f3a2218.js" crossorigin="anonymous"></script>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+	<link rel='preconnect' href='https://fonts.googleapis.com'>
+	<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+	<link href='https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap' rel='stylesheet'>
+	<meta name='description' content=''>
+    <link rel='stylesheet' href='./assets/style-edit.css'>
+	<script type='module' src='works.js'></script>
+	<script type='module' src='login.js'></script>
+	<script type='module' src='logout.js'></script>
+	<script type='module' src='modale.js'></script>
+    <script src='https://kit.fontawesome.com/f34f3a2218.js' crossorigin='anonymous'></script>
 </head>
 <body>
 <header>
-    <div class="banner">
-        <div class="edition-mode">
-            <div class="sub-edition-mode">
-                <div class="icon">
-                    <i class="fa-regular fa-pen-to-square"></i>
+    <div class='banner'>
+        <div class='edition-mode'>
+            <div class='sub-edition-mode'>
+                <div class='icon'>
+                    <i class='fa-regular fa-pen-to-square'></i>
                 </div>
                 <a>Mode Édition</a>
             </div>
             <button>publier les changement</button>
             
         </div>
-        <div class="logo-nav">
+        <div class='logo-nav'>
 	        <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 	        <nav>
 		        <ul>
 			        <li>projets</li>
 			        <li>contact</li>
 			        <li><button class='logout-button' type='submit'>logout</button></li>
-			        <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			        <li><img src='./assets/icons/instagram.png' alt='Instagram'></li>
 		        </ul>
 	        </nav>
         </div>
@@ -43,11 +43,11 @@
 </header>
 <main>
 
-	<section id="introduction">
+	<section id='introduction'>
 		<figure>
-			<img src="./assets/images/sophie-bluel.png" alt="">
-            <figcaption class="modify">
-                <i class="fa-regular fa-pen-to-square"></i>
+			<img src='./assets/images/sophie-bluel.png' alt=''>
+            <figcaption class='modify'>
+                <i class='fa-regular fa-pen-to-square'></i>
                 <button>modifier</button>
 			</figcaption>
 		</figure>
@@ -59,68 +59,68 @@
 		</article>
 	</section>
 
-	<section id="portfolio">
-        <div class="edit-gallery">
+	<section id='portfolio'>
+        <div class='edit-gallery'>
 			<h2>Mes Projets</h2>
 
-            <div class="modify">
-                <i class="fa-regular fa-pen-to-square"></i>
-                <button class="modal-button">modifier</button>
+            <div class='modify'>
+                <i class='fa-regular fa-pen-to-square'></i>
+                <button class='modal-button'>modifier</button>
 
-				<div class="the-modal">
-				<div class="modal">
-					<div class="modal-header">
-						<span class="close">&times;</span>
+				<div class='the-modal'>
+				<div class='modal'>
+					<div class='modal-header'>
+						<span class='close'>&times;</span>
 						<h2>Galerie photo</h2>
 					</div>
-					<div class="modal-body">
+					<div class='modal-body'>
 					</div>
-					<div class="modal-footer">
-						<div class="add-photo">
-							<button class="add-button">Ajouter une photo</button>
+					<div class='modal-footer'>
+						<div class='add-photo'>
+							<button class='add-button'>Ajouter une photo</button>
 						</div>
-						<div class="delete-gallery">
-							<button id="delete-gallery">Supprimer la galerie</button>
+						<div class='delete-gallery'>
+							<button id='delete-gallery'>Supprimer la galerie</button>
 						</div>
 					</div>
 				</div>
 				</div>
 
-				<div class="the-modal-2">
-				<div class="modal-2">
-					<div class="modal-header-2">
-						<span class="close-2">&times;</span>
-						<span class="back">&larr;</span>
+				<div class='the-modal-2'>
+				<div class='modal-2'>
+					<div class='modal-header-2'>
+						<span class='close-2'>&times;</span>
+						<span class='back'>&larr;</span>
 						<h2>Ajout Photo</h2>
 					</div>
-					<form class="modal-body-2">
-					<div class="modal-body-2b">	
-						<div class="photo-added">
-							<i class="fa-regular fa-image"></i>
-							<label for="imageInput" class="btn-0">+ Ajouter photo</label>
-							<input id="imageInput" type="file" name='file' required>
-							<p class="formatImg">jpg, png: 4mo max</p>
-							<img id="imageOutput" alt='Image'/>
+					<form class='modal-body-2'>
+					<div class='modal-body-2b'>	
+						<div class='photo-added'>
+							<i class='fa-regular fa-image'></i>
+							<label for='imageInput' class='btn-0'>+ Ajouter photo</label>
+							<input id='imageInput' type='file' name='file' required>
+							<p class='formatImg'>jpg, png: 4mo max</p>
+							<img id='imageOutput' alt='Image'/>
 						</div>
-						<div class="title-added">
+						<div class='title-added'>
 							<label for='psw'><b>Title</b></label>
 							<input type='text' id='added-title' name='psw' placeholder='' required>
 						</div>
 						<div class='category-added'>
 							<label for='psw'><b>Category</b></label>
-							<input type="text" name="category" list="added-category">
-							<select name="category" id="added-category" required>
-								<option value=""></option>
-								<option value="1">Objet</option>
-								<option value="2">Appartement</option>
-								<option value="3">Bar & restaurant</option>
+							<input type='text' name='category' list='added-category'>
+							<select name='category' id='added-category' required>
+								<option value=''></option>
+								<option value='1'>Objet</option>
+								<option value='2'>Appartement</option>
+								<option value='3'>Bar & restaurant</option>
 							</select>
 						</div>
-						<div class="add-photo-2">
-							<div class="erreeeuuur">Faiiiiled to load</div>
+						<div class='add-photo-2'>
+							<div class='erreeeuuur'>Faiiiiled to load</div>
 							</br>
-							<input type="submit" name="validate" list="validate-button">
-							<button id="validate-button">Valider</button> 
+							<input type='submit' name='validate' list='validate-button'>
+							<button id='validate-button'>Valider</button> 
 						</div>
 					</div>
 					</form> 
@@ -130,21 +130,21 @@
 			</div>
 		</div>
 
-		<div class="gallery">
+		<div class='gallery'>
 		</div>
 	</section>
 
-	<section id="contact">
+	<section id='contact'>
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>
-		<form action="#" method="post">
-			<label for="name">Nom</label>
-			<input type="text" name="name" id="name">
-			<label for="email">Email</label>
-			<input type="email" name="email" id="email">
-			<label for="message">Message</label>
-			<textarea name="message" id="message" cols="30" rows="10"></textarea>
-			<input type="submit" value="Envoyer">
+		<form action='#' method='post'>
+			<label for='name'>Nom</label>
+			<input type='text' name='name' id='name'>
+			<label for='email'>Email</label>
+			<input type='email' name='email' id='email'>
+			<label for='message'>Message</label>
+			<textarea name='message' id='message' cols='30' rows='10'></textarea>
+			<input type='submit' value='Envoyer'>
 		</form>
 	</section>
 </main>

@@ -1,10 +1,10 @@
 const loginButton = document.querySelector('.login-button');
 
-loginButton.addEventListener("click", async function connect(e) {
+loginButton.addEventListener('click', async function connect(e) {
     e.preventDefault();
 
-    const emailAddress = document.getElementById("Email").value;
-    const password = document.getElementById("password").value;
+    const emailAddress = document.getElementById('Email').value;
+    const password = document.getElementById('password').value;
 
     try {
         const response = await fetch('http://localhost:5678/api/users/login', {
@@ -20,7 +20,7 @@ loginButton.addEventListener("click", async function connect(e) {
         });
 
         if (!response.ok) {
-            throw Error("oooopsi");
+            throw Error('oooopsi');
         }; 
 
         const responseBody = await response.json();
@@ -30,16 +30,16 @@ loginButton.addEventListener("click", async function connect(e) {
 
         // l'administrateur peut avoir un compte admin et un utilisateur avec la même adresse. Dans ce cas, comment faire pour redirigier vers la bonne version du site ? Ci-dessous, redirection vers la page adaptée seulement si l'admin n'a pas de compte utilisateur 
 
-        if(emailAddress === "sophie.bluel@test.tld"){
-            location.href = "homepage-edit.html";
+        if(emailAddress === 'sophie.bluel@test.tld'){
+            location.href = 'homepage-edit.html';
         }else{
-            location.href = "index.html";
+            location.href = 'index.html';
         };
  
     }
 
     catch (Error) {
-        document.getElementById('erreeur').style.display = "block";
+        document.getElementById('erreeur').style.display = 'block';
     };
 });
 
