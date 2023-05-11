@@ -34,6 +34,7 @@ body {
 	line-height: 1;
 }
 
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -61,16 +62,19 @@ table {
 
 /** end reset css**/
 body {
-	max-width: 1140px;
+	
 	margin: auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
 
-
+main, .logo-nav {
+	max-width: 1140px;
+	margin: 50px auto 0 auto;
+}
 
 section {
-	margin: 50px 0
+	margin: 0px 0px 70px 0px;
 }
 
 h1{
@@ -111,9 +115,14 @@ li:hover {
 	color: #B1663C;
 }
 
+.options-nav {
+	cursor: pointer;
+}
 
 .login-option-nav {
 	text-decoration: none;
+
+	cursor: pointer;
 }
 
 .login-option-nav:visited {
@@ -153,7 +162,6 @@ li:hover {
 
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
 }
 
 .gallery {
@@ -225,10 +233,11 @@ footer nav ul {
 	margin: 2em ;
 }
 
-.filtres {
+.filters {
 	display: flex;
 	justify-content: center;
 	gap: 1rem;
+	margin-top: 2em;
 }
 
 .filtres button {
@@ -252,7 +261,7 @@ footer nav ul {
 /* defines the layout of the login form */
 
 #login-form {
-	display: flex;
+	display: none;
 	flex-direction: column;
 	align-items: center;
 
@@ -346,7 +355,7 @@ footer nav ul {
 	color: #3D3D3D;
 }
 
-#erreeur {
+#error {
 	display: none;
 	color: red;
 }
