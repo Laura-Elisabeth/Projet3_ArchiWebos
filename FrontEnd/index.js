@@ -20,8 +20,6 @@ const addButton = document.querySelector('.add-button');
 const cross2 = document.querySelector('.close-2');
 const leftArrow = document.querySelector('.back');
 
-const deleteProject = document.querySelectorAll('.deleteTag');
-
 const addProject = document.querySelector('.modal-body-2');
 const addedPhoto2 = document.querySelector('#imageOutput');
 
@@ -244,16 +242,15 @@ function modalGalleryConstructor(works) {
         divImage.appendChild(imageElement);
 
         pElement.appendChild(textEdit);
+
+        deleteProject = document.querySelectorAll('.deleteTag');
     };
 };
 modalGalleryConstructor(works);
 
 let id = 0;
-for (let i = 0; i < deleteProject.length; i++) {
-    deleteProject[i].addEventListener('click', (e) => {
-        const workId = works.map(works => works.id);
-        id = workId[i];
-        
+let deleteProject = document.querySelectorAll('.deleteTag');
+
         const response0 = fetch('http://localhost:5678/api/works/' + id, {
             method: 'DELETE',
             headers: {
