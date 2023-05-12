@@ -259,17 +259,6 @@ function deleteEventListener(work) {
     .then(async (response) =>  {
         const responseBody = await fetch('http://localhost:5678/api/works/');
         const works = await responseBody.json();
-function deleteEventListener(work) {
-    const response0 = fetch('http://localhost:5678/api/works/' + work.id, {
-        method: 'DELETE',
-        headers: {
-            accept: '*/*',
-            Authorization: 'Bearer ' + localStorage.getItem('token')
-        } 
-    })
-    .then(async (response0) =>  {
-        const responseBody = await fetch('http://localhost:5678/api/works/');
-        const works = await responseBody.json();
 
         if (response.ok) {
             // modal2.style.display = 'none';
@@ -285,22 +274,7 @@ function deleteEventListener(work) {
     .catch((Error) => {
         console.log('Try again!');
     });
-}
-        if (response0.ok) {
-            modal2.style.display = 'none';
-            modal.style.display = 'none';
-            document.querySelector('.gallery').innerHTML = '';
-            document.querySelector('.modal-body').innerHTML = '';
-            galleryConstructor(works);
-            modalGalleryConstructor(works);
-        } else {
-            throw Error('Error');
-        } 
-    })
-    .catch((Error) => {
-        console.log('Try again!');
-    });
-}
+};
 
 imageInput.onchange = evt => {
     const addedPhoto = document.getElementById('imageInput').files[0];
@@ -332,6 +306,7 @@ imageInput.onchange = evt => {
         modal2.style.display = 'block';
         addProject.reset();
         addedPhoto2.style.display = 'none';
+        document.querySelector('.upload-success').style.display = 'none';
     }); 
 };
 
