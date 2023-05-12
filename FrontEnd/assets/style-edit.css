@@ -712,6 +712,15 @@ header {
 	font-weight: 100;
 }
 
+.upload-success {
+	display: none;
+	
+	color: green;
+	font-family: 'Syne';
+	font-size: 35px;
+	font-weight: 100;
+}
+
 .trash-can {
 	cursor: pointer;
 

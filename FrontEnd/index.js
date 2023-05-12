@@ -226,7 +226,6 @@ function modalGalleryConstructor(works) {
         deleteWork.classList.add('deleteTag');
         deleteWork.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-trash-can"></i>')
         deleteWork.style.position = 'absolute';
-        deleteWork.setAttribute('id', i);
         deleteWork.addEventListener('click', (e) => deleteEventListener(works[i]));
 
         const pElement = document.createElement('figcapion');
@@ -260,8 +259,8 @@ function deleteEventListener(work) {
         const works = await responseBody.json();
 
         if (response.ok) {
-            modal2.style.display = 'none';
-            modal.style.display = 'none';
+            // modal2.style.display = 'none';
+            // modal.style.display = 'none';
             document.querySelector('.gallery').innerHTML = '';
             document.querySelector('.modal-body').innerHTML = '';
             galleryConstructor(works);
@@ -277,10 +276,12 @@ function deleteEventListener(work) {
 
 imageInput.onchange = evt => {
     const addedPhoto = document.getElementById('imageInput').files[0];
+
     const btn0 = document.querySelector('.btn-0');
     const icon = document.querySelector('.fa-image');
     const formatImg = document.querySelector('.formatImg');
     const photoFormat = document.querySelector('.photo-added');
+    const validate = document.querySelector('#validate-button');
 
     if (addedPhoto) {
         document.getElementById('imageOutput').src = URL.createObjectURL(addedPhoto);
@@ -289,6 +290,7 @@ imageInput.onchange = evt => {
         icon.style.display = 'none';
         formatImg.style.display = 'none';
         photoFormat.style.padding = '0rem';
+        validate.style.backgroundColor = '#1D6154';
     };
 
     addButton.addEventListener('click', function () {
@@ -331,8 +333,26 @@ addProject.addEventListener('submit', async function (e) {
             throw Error('Error');
         };
 
-        modal.style.display = 'none';
+        //modal.style.display = 'none';
         modal2.style.display = 'none';
+        /*const addedPhoto = document.getElementById('imageInput').files[0];
+        const btn0 = document.querySelector('.btn-0');
+        const icon = document.querySelector('.fa-image');
+        const formatImg = document.querySelector('.formatImg');
+        const photoFormat = document.querySelector('.photo-added'); */
+
+        document.getElementById('imageOutput').src = URL.createObjectURL(addedPhoto);
+
+        /*btn0.style.display = 'block';
+        icon.style.display = 'block';
+        formatImg.style.display = 'block';
+        photoFormat.style.padding = '2rem';
+        imageOutput.style.display = 'block';
+        modal2.style.display = 'block';
+        addProject.reset();
+        addedPhoto2.style.display = 'none';*/
+
+        document.querySelector('.upload-success').style.display = 'block';
 
         const responseBody = await fetch('http://localhost:5678/api/works/');
         const works = await responseBody.json();
