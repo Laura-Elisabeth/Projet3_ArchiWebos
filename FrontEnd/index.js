@@ -226,9 +226,9 @@ function modalGalleryConstructor(works) {
         deleteWork.classList.add('deleteTag');
         deleteWork.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-trash-can"></i>')
         deleteWork.style.position = 'absolute';
-        deleteWork.setAttribute('id', i);
-
-        const pElement = document.createElement('figcapion');
+        deleteWork.setAttribute('id', id);
+        
+        const pElement = document.createElement('figcaption');
         const textEdit = document.createTextNode('edit');
 
         modalBody.appendChild(workElement);
@@ -243,39 +243,75 @@ function modalGalleryConstructor(works) {
 
         pElement.appendChild(textEdit);
 
-        deleteProject = document.querySelectorAll('.deleteTag');
     };
 };
 modalGalleryConstructor(works);
 
+const deleteProject = document.querySelectorAll('.deleteTag');
 let id = 0;
-let deleteProject = document.querySelectorAll('.deleteTag');
+for (let i = 0; i < deleteProject.length; i++) {
+    deleteProject[i].addEventListener('click', async (e) => {
+        e.preventDefault();
 
-        const response0 = fetch('http://localhost:5678/api/works/' + id, {
+        const workId = works.map(work => work.id);
+        id = workId[i];
+        console.log(id);
+
+        /* fetch('http://localhost:5678/api/works/' + id, {
             method: 'DELETE',
             headers: {
-                accept: '*/*',
+                'accept': ,
                 Authorization: 'Bearer ' + localStorage.getItem('token')
             } 
         })
-        .then(async (response0) =>  {
-            const responseBody = await fetch('http://localhost:5678/api/works/');
-            const works = await responseBody.json();
-
-            if (response0.ok) {
+        .then(async (response)=>{
+            //const responseBody = await fetch('http://localhost:5678/api/works/');
+            //const works = await responseBody.JSON();
+            if (response.ok) {
+                const responseBody = await fetch('http://localhost:5678/api/works/');
+                const works = await responseBody.JSON();
                 modal2.style.display = 'none';
                 modal.style.display = 'none';
                 document.querySelector('.gallery').innerHTML = '';
                 document.querySelector('.modal-body').innerHTML = '';
                 galleryConstructor(works);
-                modalGalleryConstructor(works);
+                modalGalleryConstructor(works)
             } else {
                 throw Error('Error');
-            } 
+            }
         })
-        .catch((Error) => {
+       .catch((Error) => {
             console.log('Try again!');
-        });
+        }) */
+        try {
+            const response = await fetch('http://localhost:5678/api/works/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'accept': '*/*',
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                } 
+            });
+
+            if (!response.ok) {
+                throw Error('Error');
+            };
+
+            const responseBody = await fetch('http://localhost:5678/api/works/');
+            const works = await responseBody.json();
+
+            modal.style.display = 'none';
+            modal2.style.display = 'none';
+        
+            document.querySelector('.gallery').innerHTML = '';
+            document.querySelector('.modal-body').innerHTML = '';
+
+            galleryConstructor(works);
+            modalGalleryConstructor(works);
+        }
+
+        catch (Error) {
+            console.log('Try again!');
+        };
     });
 };
 
