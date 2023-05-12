@@ -226,9 +226,10 @@ function modalGalleryConstructor(works) {
         deleteWork.classList.add('deleteTag');
         deleteWork.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-trash-can"></i>')
         deleteWork.style.position = 'absolute';
-        deleteWork.setAttribute('id', id);
-        
-        const pElement = document.createElement('figcaption');
+        deleteWork.setAttribute('id', i);
+        deleteWork.addEventListener('click', (e) => deleteEventListener(works[i]));
+
+        const pElement = document.createElement('figcapion');
         const textEdit = document.createTextNode('edit');
 
         modalBody.appendChild(workElement);
@@ -242,78 +243,37 @@ function modalGalleryConstructor(works) {
         divImage.appendChild(imageElement);
 
         pElement.appendChild(textEdit);
-
     };
 };
 modalGalleryConstructor(works);
 
-const deleteProject = document.querySelectorAll('.deleteTag');
-let id = 0;
-for (let i = 0; i < deleteProject.length; i++) {
-    deleteProject[i].addEventListener('click', async (e) => {
-        e.preventDefault();
+function deleteEventListener(work) {
+    fetch('http://localhost:5678/api/works/' + work.id, {
+        method: 'DELETE',
+        headers: {
+            accept: '*/*',
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+        } 
+    })
+    .then(async (response) =>  {
+        const responseBody = await fetch('http://localhost:5678/api/works/');
+        const works = await responseBody.json();
 
-        const workId = works.map(work => work.id);
-        id = workId[i];
-        console.log(id);
-
-        /* fetch('http://localhost:5678/api/works/' + id, {
-            method: 'DELETE',
-            headers: {
-                'accept': ,
-                Authorization: 'Bearer ' + localStorage.getItem('token')
-            } 
-        })
-        .then(async (response)=>{
-            //const responseBody = await fetch('http://localhost:5678/api/works/');
-            //const works = await responseBody.JSON();
-            if (response.ok) {
-                const responseBody = await fetch('http://localhost:5678/api/works/');
-                const works = await responseBody.JSON();
-                modal2.style.display = 'none';
-                modal.style.display = 'none';
-                document.querySelector('.gallery').innerHTML = '';
-                document.querySelector('.modal-body').innerHTML = '';
-                galleryConstructor(works);
-                modalGalleryConstructor(works)
-            } else {
-                throw Error('Error');
-            }
-        })
-       .catch((Error) => {
-            console.log('Try again!');
-        }) */
-        try {
-            const response = await fetch('http://localhost:5678/api/works/' + id, {
-                method: 'DELETE',
-                headers: {
-                    'accept': '*/*',
-                    Authorization: 'Bearer ' + localStorage.getItem('token')
-                } 
-            });
-
-            if (!response.ok) {
-                throw Error('Error');
-            };
-
-            const responseBody = await fetch('http://localhost:5678/api/works/');
-            const works = await responseBody.json();
-
-            modal.style.display = 'none';
+        if (response.ok) {
             modal2.style.display = 'none';
-        
+            modal.style.display = 'none';
             document.querySelector('.gallery').innerHTML = '';
             document.querySelector('.modal-body').innerHTML = '';
-
             galleryConstructor(works);
             modalGalleryConstructor(works);
-        }
-
-        catch (Error) {
-            console.log('Try again!');
-        };
+        } else {
+            throw Error('Error');
+        } 
+    })
+    .catch((Error) => {
+        console.log('Try again!');
     });
-};
+}
 
 imageInput.onchange = evt => {
     const addedPhoto = document.getElementById('imageInput').files[0];
@@ -388,4 +348,3 @@ addProject.addEventListener('submit', async function (e) {
         document.querySelector('.error-2').style.display = 'block';
     };
 });
-
