@@ -227,6 +227,8 @@ function modalGalleryConstructor(works) {
         deleteWork.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-trash-can"></i>')
         deleteWork.style.position = 'absolute';
         deleteWork.addEventListener('click', (e) => deleteEventListener(works[i]));
+        deleteWork.setAttribute('id', i);
+        deleteWork.addEventListener('click', (e) => deleteEventListener(works[i]));
 
         const pElement = document.createElement('figcapion');
         const textEdit = document.createTextNode('edit');
@@ -257,10 +259,36 @@ function deleteEventListener(work) {
     .then(async (response) =>  {
         const responseBody = await fetch('http://localhost:5678/api/works/');
         const works = await responseBody.json();
+function deleteEventListener(work) {
+    const response0 = fetch('http://localhost:5678/api/works/' + work.id, {
+        method: 'DELETE',
+        headers: {
+            accept: '*/*',
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+        } 
+    })
+    .then(async (response0) =>  {
+        const responseBody = await fetch('http://localhost:5678/api/works/');
+        const works = await responseBody.json();
 
         if (response.ok) {
             // modal2.style.display = 'none';
             // modal.style.display = 'none';
+            document.querySelector('.gallery').innerHTML = '';
+            document.querySelector('.modal-body').innerHTML = '';
+            galleryConstructor(works);
+            modalGalleryConstructor(works);
+        } else {
+            throw Error('Error');
+        } 
+    })
+    .catch((Error) => {
+        console.log('Try again!');
+    });
+}
+        if (response0.ok) {
+            modal2.style.display = 'none';
+            modal.style.display = 'none';
             document.querySelector('.gallery').innerHTML = '';
             document.querySelector('.modal-body').innerHTML = '';
             galleryConstructor(works);
