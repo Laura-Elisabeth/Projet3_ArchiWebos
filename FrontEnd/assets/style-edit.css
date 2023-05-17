@@ -169,8 +169,16 @@ li:hover {
     padding-top: 7px;
 }
 
+.modify3 {
+	display: none;
+	justify-content: flex-start;
+	margin-left: 0rem;
+
+	padding-bottom: 1rem;
+}
+
 #introduction article {
-	flex: 1
+	flex: 1;
 }
 
 #introduction h2 {
@@ -367,7 +375,7 @@ header {
     cursor: pointer;
 }
 
-.modify button, .modify2 button {
+.modify button, .modify2 button, .modify3 button {
 	background: none;
 	border: none;
 
@@ -457,19 +465,45 @@ header {
 	width: 100%;
 }
 
+.div-icons {
+	display: flex;
+	justify-content: space-between;
+
+	width:50%;
+	gap: 3px;
+
+	position: absolute;
+
+	right: 0;
+}
+
 .deleteTag {
 	cursor: pointer;
 
 	background-color: black;
 
 	margin: 5px;
-	float: right;
+	right: 0;
 
 	border-radius: 2px;
 }
 
-.deleteTag .fa-solid {
+.move-work .fa-sharp {
+	opacity: 0;
+}
+
+.move-work:hover {
+	display: flex;
+	cursor: pointer;
+	background-color: black;
+	margin: 5px;
+	left: 1; 
+	border-radius: 2px;
+}
+
+.deleteTag .fa-solid, .move-work .fa-sharp:hover {
 	color: white;
+	opacity: 1;
 }
 
 .modal-footer {
@@ -670,8 +704,11 @@ header {
 	align-items: center;
 	flex-direction: column;
 
-	margin-top: 1.5rem;
+	margin-top: 0.5rem;
+	padding-top: 0.5rem;
 	gap: 1rem;
+
+	border-top: solid 1px  black;
 }
 
 .add-photo-2 input {

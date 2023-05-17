@@ -30,6 +30,7 @@ const portfolio = document.querySelector('#portfolio');
 const contact = document.querySelector('#contact');
 const modify = document.querySelector('.modify');
 const modify2 = document.querySelector('.modify2');
+const modify3 = document.querySelector('.modify3');
 const filters = document.querySelector('.filters');
 const h2 = document.querySelector('.portfolio-h2');
 
@@ -166,15 +167,18 @@ logOutButton.addEventListener('click', () => {
 
 modifyButton.addEventListener('click', function () {
     modal.style.display = 'block';
+    modify3.style.display = 'block';
 });
 
 cross.addEventListener('click', function () {
     modal.style.display = 'none';
+    modify3.style.display = 'none';
 });
 
 window.addEventListener('click', function (e) {
     if (e.target == modal) {
         modal.style.display = 'none';
+        modify3.style.display = 'none';
     };
 });
 
@@ -191,12 +195,14 @@ leftArrow.addEventListener('click', function () {
 cross2.addEventListener('click', function () {
     modal2.style.display = 'none';
     modal.style.display = 'none';
+    modify3.style.display = 'none';
 });
 
 window.addEventListener('click', function (e) {
     if (e.target == modal2) {
         modal2.style.display = 'none';
         modal.style.display = 'none';
+        modify3.style.display = 'none';
     };
 });
 
@@ -222,13 +228,21 @@ function modalGalleryConstructor(works) {
         imageElement.style.position = 'absolute';
         imageElement.src = figure.imageUrl;
 
+        const divIcons = document.createElement('div');
+        divIcons.classList.add('div-icons');
+        divIcons.style.display = 'flex';
+        divIcons.style.gap = '2px';
+    
         const deleteWork = document.createElement('div');
         deleteWork.classList.add('deleteTag');
         deleteWork.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-trash-can"></i>')
         deleteWork.style.position = 'absolute';
         deleteWork.addEventListener('click', (e) => deleteEventListener(works[i]));
-        deleteWork.setAttribute('id', i);
-        deleteWork.addEventListener('click', (e) => deleteEventListener(works[i]));
+
+        const moveWork = document.createElement('div');
+        moveWork.classList.add('move-work');
+        moveWork.insertAdjacentHTML('beforeend', '<i class="fa-sharp fa-solid fa-up-down-left-right"></i>')
+        moveWork.style.position = 'absolute';
 
         const pElement = document.createElement('figcapion');
         const textEdit = document.createTextNode('edit');
@@ -239,7 +253,9 @@ function modalGalleryConstructor(works) {
         workElement.appendChild(pElement);
 
         divElement.appendChild(divImage);
-        divElement.appendChild(deleteWork);
+        divElement.appendChild(divIcons);
+        divIcons.appendChild(deleteWork);
+        divIcons.appendChild(moveWork);
 
         divImage.appendChild(imageElement);
 
@@ -261,8 +277,6 @@ function deleteEventListener(work) {
         const works = await responseBody.json();
 
         if (response.ok) {
-            // modal2.style.display = 'none';
-            // modal.style.display = 'none';
             document.querySelector('.gallery').innerHTML = '';
             document.querySelector('.modal-body').innerHTML = '';
             galleryConstructor(works);
@@ -278,6 +292,8 @@ function deleteEventListener(work) {
 
 imageInput.onchange = evt => {
     const addedPhoto = document.getElementById('imageInput').files[0];
+    const addedTitle = document.getElementById('added-title').value;
+    const addedCategory = document.getElementById('added-category').value;
 
     const btn0 = document.querySelector('.btn-0');
     const icon = document.querySelector('.fa-image');
@@ -292,7 +308,6 @@ imageInput.onchange = evt => {
         icon.style.display = 'none';
         formatImg.style.display = 'none';
         photoFormat.style.padding = '0rem';
-        validate.style.backgroundColor = '#1D6154';
     };
 
     addButton.addEventListener('click', function () {
@@ -336,30 +351,15 @@ addProject.addEventListener('submit', async function (e) {
             throw Error('Error');
         };
 
-        //modal.style.display = 'none';
         modal2.style.display = 'none';
-        /*const addedPhoto = document.getElementById('imageInput').files[0];
-        const btn0 = document.querySelector('.btn-0');
-        const icon = document.querySelector('.fa-image');
-        const formatImg = document.querySelector('.formatImg');
-        const photoFormat = document.querySelector('.photo-added'); */
 
         document.getElementById('imageOutput').src = URL.createObjectURL(addedPhoto);
-
-        /*btn0.style.display = 'block';
-        icon.style.display = 'block';
-        formatImg.style.display = 'block';
-        photoFormat.style.padding = '2rem';
-        imageOutput.style.display = 'block';
-        modal2.style.display = 'block';
-        addProject.reset();
-        addedPhoto2.style.display = 'none';*/
 
         document.querySelector('.upload-success').style.display = 'block';
 
         const responseBody = await fetch('http://localhost:5678/api/works/');
         const works = await responseBody.json();
-        
+
         document.querySelector('.gallery').innerHTML = '';
         document.querySelector('.modal-body').innerHTML = '';
 
